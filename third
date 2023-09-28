@@ -1,0 +1,51 @@
+class Program
+{
+    static void Main()
+    {
+        Random random = new Random();
+        int randomNumber = random.Next(0, 11);
+        int attempts = 3; // Кількість спроб
+
+        Console.WriteLine("Вгадайте число від 0 до 10.");
+        
+        while (attempts > 0)
+        {
+            Console.Write("Введіть вашу відповідь: ");
+            string userInput = Console.ReadLine();
+            if (int.TryParse(userInput, out int userGuess))
+            {
+                if (userGuess < 0 || userGuess > 10)
+                {
+                    Console.WriteLine("Введене число повинно бути від 0 до 10.");
+                }
+                else
+                {
+                    if (userGuess == randomNumber)
+                    {
+                        Console.WriteLine("Ви вгадали число! Правильна відповідь: " + randomNumber);
+                        break;
+                    }
+                    else if (userGuess < randomNumber)
+                    {
+                        Console.WriteLine("Загадане число більше.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Загадане число менше.");
+                    }
+                    attempts--;
+                    Console.WriteLine("Залишилося спроб: " + attempts);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Неправильний формат вводу. Введіть ціле число.");
+            }
+        }
+
+        if (attempts == 0)
+        {
+            Console.WriteLine("Ви вичерпали всі спроби. Загадане число було: " + randomNumber);
+        }
+    }
+}
